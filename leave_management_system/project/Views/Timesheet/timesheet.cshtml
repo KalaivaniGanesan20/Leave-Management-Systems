@@ -1,0 +1,55 @@
+@using EmployeeTimesheet;
+@model Timesheet
+@{
+   var username=ViewContext.HttpContext.Session.GetString("name");
+}
+
+<a type="submit" class="btn btn-primary mb-3 w-25" asp-action="user" asp-controller="Login" style="margin-left:70%;margin-top:30px"> << back to dashboard</a>
+
+<div class="Box">
+<form id="timesheet"  method="post">
+      <label asp-for="TimesheetId" class="sm-3 form-label">TimesheetId</label>
+         <input asp-for="TimesheetId" id="timesheetid" type="text" class="form-control w-75" value="@ViewBag.SheetId">
+   
+      <label asp-for="username" class="col-sm-3 col-form-label">UserName</label>
+         <input asp-for="username" id="username" type="text" class="form-control w-75" value="@username">
+      <label asp-for="projectname" class="col-sm-3 col-form-label">projectName</label>
+         <input asp-for="projectname" type="text" class="form-control w-75">
+      <label asp-for="date" class="col-sm-2 col-form-label">Date</label>
+         <input asp-for="date" type="text" id="date" value=@ViewBag.applydate class="form-control w-75">
+  <br>
+      <div style="margin-left:70px">
+      <input class="btn btn-primary mb-3 w-50" type="submit" value="create">
+      <a class="btn btn-primary mb-3 w-50" asp-action="addtask" asp-controller="Timesheet" asp-route-id="@ViewBag.TimesheetId">add task</a>
+      </div>
+</form>
+</div>
+<div class="imgcontainer">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbLcIo-fNmbO-Tih9-Rl3P5p2r9RkKSypypg&usqp=CAU">
+</div>
+
+<style>
+   .Box{
+   border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px;
+  margin-top:50px;
+  margin-left:-10%;
+  width:60%;
+}
+form{
+   margin-left: 20%;
+   margin-top:-10px;
+   width:75%;
+}
+.imgcontainer
+{
+   margin-left:55%;
+   margin-top: -35%;
+}
+img
+{
+   width:700px;
+   height:90%
+}
+</style>

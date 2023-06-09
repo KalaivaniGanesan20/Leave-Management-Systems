@@ -1,0 +1,66 @@
+@using EmployeedataModels;
+@model List<Employee>
+@{
+    ViewData["Title"]="Create";
+}
+
+<div style="margin-top:20px;">
+<a class="btn btn-primary mb-3" asp-action="admindashboard" asp-controller="admin">Back to Daashboard</a>
+
+<table id="emptable" class="table table-dark table-striped">
+  <thead>
+    <tr><th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date of birth</th>
+        <th scope="col">age</th>
+        <th scope="col">Mailid</th>
+        <th scope="col">Contact_number</th>
+        <th scope="col">DOJ</th>
+        <th scope="col">Department</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Photo</th>
+        <th>Action</th>
+        <th></th>
+        <th>Verify</th>
+  </thead>
+  <tbody>
+    <tr>
+      @foreach(Employee employee in Model)
+        {
+            <tr >
+                <td>@Html.DisplayFor(emp=>employee.Id)</td>
+                <td>@Html.DisplayFor(emp=>employee.username)</td>
+                <td id="dob">@Html.DisplayFor(emp=>employee.dateofbirth)</td>
+                <td id="age-@employee.Id"></td>
+                <td>@Html.DisplayFor(emp=>employee.emailid)</td>
+                <td>@Html.DisplayFor(emp=>employee.contact_number)</td>
+                <td>@Html.DisplayFor(emp=>employee.dateofjoined)</td>
+                <td>@Html.DisplayFor(emp=>employee.department)</td>
+                <td>@Html.DisplayFor(emp=>employee.salary)</td>
+                <td><img src="~/Images/@employee.ImageFile" style="width:75px;height:75px"/></td>
+                <td><a class="btn btn-primary" asp-action="update" asp-route-id="@employee.Id">Update</a></td>
+                <td><a class="btn btn-primary" asp-action="Delete" asp-route-id="@employee.Id">Delete</a></td>
+              <td><a class="btn btn-primary" id="register" asp-area="Identity" asp-page="/Account/Register" asp-route-name="@employee.username" asp-route-emailid="@employee.emailid">VerifyUser</a></td>
+            </tr>
+        }
+        
+  </tbody>
+</table>
+</div>
+<script>
+  window.onload=function()
+  {
+    var dobCells = document.querySelectorAll("#dob");
+    dobCells.forEach(function(cell) 
+    {
+      var value = cell.textContent;
+      var dateParts = value.split("/"); // Split the date string into an array of parts
+      var year = new Date(dateParts[2], dateParts[0] - 1, dateParts[1]).getFullYear(); 
+      var lastnum = year % 100;
+      var age = lastnum > 23 ? 123 - lastnum : 23 - lastnum;
+      var ageElementId = "age-" + cell.closest("tr").querySelector("[id^='age-']").id.substring(4);
+      var ageElement = document.getElementById(ageElementId);
+      ageElement.textContent = age;
+   });
+  }
+</script>

@@ -1,0 +1,55 @@
+@using EmployeeTimesheet
+@model IEnumerable<Timesheet>
+
+<a type="submit" class="btn btn-primary mb-3 w-25" asp-action="user" asp-controller="Login"><< back to dashboard</a>
+
+<table class="table table-dark table-striped">
+<thead>
+        <th>projectName</th>
+        <th>taskname</th>
+        <th></th>
+        <th></th>
+</thead>
+<tbody class="table-secondary">
+    @foreach(var timesheet in Model)
+    {
+        <tr>
+            <td>@timesheet.projectname</td>
+            <th>taskname</th>
+            <th>HoursWorked</th>
+            <th>taskstatus</th>
+            @foreach(var task in timesheet.tasks)
+            {
+                <tr>
+                <td></td>
+                <td>@task.taskname</td>
+                <td>@task.hoursworked</td>
+                <td>@task.taskstatus</td>
+                </tr>
+            }
+        </tr>
+    }
+</tbody>
+</table>
+ <table  class="table table-dark table-striped">
+    <thead>
+        <th>sickleave</th>
+        <th>compensatoryleave</th>
+        <th>casualleave</th>
+        <th>Lossofpay</th>
+        <th>annualleave</th>
+    </thead>
+    <tbody class="table-secondary">
+ @foreach(var l in ViewBag.mybalance)
+    {
+        <tr>
+            <td>@l.sickleave</td>
+            <td>@l.Compensatoryleave</td>
+            <td>@l.casualleave</td>
+            <td>@l.Lossofpay</td>
+            <td>@l.annualleave</td>
+        </tr>
+    } 
+    </tbody>
+</table>
+

@@ -1,0 +1,410 @@
+
+
+@using EmployeedataModels;
+
+@model Employee;
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="../assets1/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets1/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets1/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets1/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Include jQuery Validation library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+ </head>
+
+  <body>
+              
+    @if(ViewBag.exist!=null)
+    {
+                       <div class="alert alert-danger alert-dismissible w-50" role="alert">
+                        <strong>user already exist !</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+    }
+     <a class="btn btn-primary mb-3" asp-action="admindashboard" asp-controller="admin">Back to Daashboard</a>
+     @* @Html.ActionLink("Backtodashboard","admindashboard","admin") *@
+
+       <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+
+              <!-- Basic Layout & Basic with Icons -->
+              <div class="row">                
+                <!-- Basic with Icons -->
+                <div class="col-xxl">
+                  <div class="card mb-4">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                      <h5 class="mb-0">Add Employee</h5>
+                    </div>
+                    <div class="card-body">
+                      <form method="post"  enctype="multipart/form-data">
+                      <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Html.DisplayNameFor(model => model.Id)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-company2" class="input-group-text"
+                                ><i class="bx bx-buildings"></i
+                              ></span>
+                              <input
+                                type="text"
+                                id="Id"
+                                class="form-control"
+                                asp-for="Id" required
+                                aria-describedby="basic-icon-default-company2"
+                              />        
+                              <span asp-validation-for="Id" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                           <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Html.DisplayNameFor(model => model.username)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-fullname2" class="input-group-text"
+                                ><i class="bx bx-user"></i
+                              ></span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                asp-for="username" required
+                                aria-describedby="basic-icon-default-fullname2"
+                              />
+                                      <span asp-validation-for="username" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+                         <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Html.DisplayNameFor(model => model.Firstname)</label> 
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-fullname2" class="input-group-text"
+                                ><i class="bx bx-user"></i
+                              ></span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="firstname"
+                                asp-for="Firstname" required
+                                aria-describedby="basic-icon-default-fullname2"
+                              />
+                                      <span asp-validation-for="Firstname" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+                         <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Html.DisplayNameFor(model => model.Lastname)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-fullname2" class="input-group-text"
+                                ><i class="bx bx-user"></i
+                              ></span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="lastname"
+                                asp-for="Lastname" required
+                                aria-describedby="basic-icon-default-fullname2"
+                              />
+                                      <span asp-validation-for="Lastname" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+                        
+						            @* <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Html.DisplayNameFor(model => model.age)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-company2" class="input-group-text"
+                                ><i class="bx bx-buildings"></i
+                              ></span>
+                              <input
+                                type="text"
+                                id="age"
+                                class="form-control"  
+                                asp-for="age"    required                     
+								                aria-describedby="basic-icon-default-company2"
+                              />        
+                              <span asp-validation-for="age" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div> *@
+                         <div class="row mb-3">
+                          @* <label class="col-sm-2 form-label" for="basic-icon-default-phone">@Html.DisplayNameFor(model => model.dateofbirth)</label> *@
+                          @Html.DisplayFor(model=>model.dateofbirth , new{@class="col-sm-2 form-label"})
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-phone2" class="input-group-text"
+                                ><i class="bx bx-phone"></i
+                              ></span>
+                              <input
+                                type="date"
+                                id="dateofbirth"
+                                class="form-control phone-mask"
+                                asp-for="dateofbirth" required
+                                placeholder="mm/dd/yyyy"
+                                aria-describedby="basic-icon-default-phone2"
+                              />        
+                              <span asp-validation-for="dateofbirth" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+                         <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Html.DisplayNameFor(model => model.userpassword)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-company2" class="input-group-text"
+                                ><i class="bx bx-buildings"></i
+                              ></span>
+                              <input
+                                type="password"
+                                id="userpassword"
+                                asp-for="userpassword" required
+                                class="form-control"                           
+								               aria-describedby="basic-icon-default-company2"
+                              />        
+                              <span asp-validation-for="userpassword" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+
+						<div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="exampleFormControlSelect1" class="form-label">@Html.DisplayNameFor(model => model.department)</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+						<select class="form-select" asp-for="department" id="department" aria-label="Default select example" required>
+                          <option value="developer">developer</option>
+                          <option value="Tester">Tester</option>
+                          <option value="Manager">Manager</option>
+                          <option value="Admin">Admin</option>
+                          <option value="SalesManager">SalesManager</option>
+                          <option value="HR">HR</option>
+
+                        </select>        
+                        <span asp-validation-for="department" class="text-danger"></span>
+
+                          </div>
+                        </div>
+						</div>
+
+             <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Html.DisplayNameFor(model => model.HR)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-company2" class="input-group-text"
+                                ><i class="bx bx-buildings"></i
+                              ></span>
+                              <input
+                                type="text"
+                                id="HR"
+                                class="form-control"
+                                asp-for="HR" required
+                                aria-describedby="basic-icon-default-company2"
+                              />        
+                              <span asp-validation-for="HR" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+                         <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Html.DisplayNameFor(model => model.Manager)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-company2" class="input-group-text"
+                                ><i class="bx bx-buildings"></i
+                              ></span>
+                              <input
+                                type="text"
+                                id="Manager"
+                                class="form-control"
+                                asp-for="Manager" required
+                                aria-describedby="basic-icon-default-company2"
+                              />        
+                              <span asp-validation-for="Manager" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+              
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-email">@Html.DisplayNameFor(model => model.emailid)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                              <input
+                                type="text"
+                                id="emailid"
+                                class="form-control"
+                                asp-for="emailid" required
+                                aria-describedby="basic-icon-default-email2"
+                              />        
+                              <span id="basic-icon-default-email2" class="input-group-text"></span>
+                            </div>
+                                                          <span asp-validation-for="emailid" class="text-danger"></span>
+
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 form-label" for="basic-icon-default-phone">@Html.DisplayNameFor(model => model.contact_number)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-phone2" class="input-group-text"
+                                ><i class="bx bx-phone"></i
+                              ></span>
+                              <input
+                                type="text"
+                                id="contact_number"
+                                class="form-control phone-mask"
+                                placeholder="658 799 8941"
+                                asp-for="contact_number" required
+                                aria-describedby="basic-icon-default-phone2"
+                              />       
+                               <span asp-validation-for="contact_number" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+                       <div class="row mb-3">
+                          <label class="col-sm-2 form-label" for="basic-icon-default-phone">@Html.DisplayNameFor(model => model.dateofjoined)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-phone2" class="input-group-text"
+                                ><i class="bx bx-phone"></i
+                              ></span>
+                              <input
+                                type="date"
+                                id="dateofjoined"
+                                class="form-control phone-mask"
+                                asp-for="dateofjoined" required
+                                placeholder="mm/dd/yyyy"
+                                aria-describedby="basic-icon-default-phone2"
+                              />        
+                              <span asp-validation-for="dateofjoined" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+					    <div class="row mb-3">
+                          <label class="col-sm-2 form-label" for="basic-icon-default-phone">@Html.DisplayNameFor(model => model.salary)</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-phone2" class="input-group-text"
+                                ><i class="bx bx-phone"></i
+                              ></span>
+                              <input
+                                type="text"
+                                id="salary"
+                                class="form-control phone-mask"
+                                asp-for="salary" required
+                                aria-describedby="basic-icon-default-phone2"
+                              />        
+                              <span asp-validation-for="salary" class="text-danger"></span>
+
+                            </div>
+                          </div>
+                        </div>
+						 <div>
+                            <label class="col-sm-2 form-label" for="basic-icon-default-phone">@Html.DisplayNameFor(model => model.ImageFile)</label>
+							<input class="form-control-sm" asp-for="ImageUrl" class="form-control form-control-lg" id="formFileLg" type="file" required>
+						</div>
+							
+						<div class="row justify-content-end" style="margin-left:30%;">
+                          <div class="col-sm-10">
+                            <button type="submit" onclick="()" class="btn btn-primary">Add User</button>
+                          </div>
+            </div>
+         </form>
+      </div>
+     </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Get the user ID input element
+  const userIdInput = document.getElementById('Id');
+  
+  // Get the other form field elements
+  const name = document.getElementById('name');
+  const firstname = document.getElementById('firstname');
+  const lastname = document.getElementById('lastname');
+  const datofbirth = document.getElementById('dateofbirth');
+  const emailid = document.getElementById('emailid');
+  const contact_number = document.getElementById('contact_number');
+  const HR = document.getElementById('HR');
+  const Manager= document.getElementById('Manager');
+  const dateofjoined = document.getElementById('dateofjoined');
+  const department = document.getElementById('department');
+  const salary = document.getElementById('salary');
+ 
+  // Disable or hide the other form fields by default
+  name.disabled = true;
+  firstname.disabled = true;
+  lastname.disabled = true;
+  dateofbirth.disabled = true;
+  emailid.disabled = true;
+  contact_number.disabled = true;
+  HR.disabled = true;
+  Manager.disabled = true;
+  dateofjoined.disabled = true;
+  department.disabled = true;
+  salary.disabled = true;
+
+  // otherField1.style.display = 'none'; // if you want to hide instead of disable
+  
+  // Add an event listener to the user ID input element to enable or show the other fields when it's filled in
+  userIdInput.addEventListener('input', function() {
+    if (userIdInput.value) {
+      name.disabled = false;
+      firstname.disabled = false;
+      lastname.disabled = false;
+  dateofbirth.disabled = false;
+  emailid.disabled = false;
+  contact_number.disabled = false;
+  HR.disabled = false;
+  Manager.disabled = false;
+  dateofjoined.disabled = false;
+  department.disabled = false;
+  salary.disabled = false;
+
+      // otherField1.style.display = 'block'; // if you want to show instead of enable
+    }
+  });
+</script>
+
+</body>
+  
+</html>

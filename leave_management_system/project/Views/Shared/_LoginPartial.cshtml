@@ -1,0 +1,37 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+         var user = await UserManager.GetUserAsync(User);
+         var roles = await UserManager.GetRolesAsync(user);
+         foreach(var role in roles)
+         {
+                   if(role=="developer" || role=="Tester")
+                    {
+                        <a asp-action="user" asp-controller="Login">Dashboard</a>
+                    }
+                    if(role=="Manager")
+                    {
+                        <a asp-action="Managerdashboard" asp-controller="Manager">Dashboard</a>
+                    }
+                    if(role=="Hr")
+                    {
+                        <a asp-action="HRdashboard" asp-controller="HR">Dashboard</a>
+                    }
+                    if(role=="Admin")
+                    {
+                        <a asp-action="admindashboard" asp-controller="admin">Dashboard</a>
+                    }
+         }
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">LOGIN</a>
+    </li>
+}
+</ul>

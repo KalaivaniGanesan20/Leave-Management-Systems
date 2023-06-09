@@ -1,0 +1,64 @@
+@using leave.Models.Domain;
+@model IEnumerable<Leaves>
+@using ExceptionFilters;
+@* @if(TempData["errormsg"]!=null)
+{
+        <div class="alert alert-danger alert-dismissible w-50" role="alert">
+            <strong>No proper leaves available to approve!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> 
+} *@
+@{
+    var errorexit=CustomExceptionFilters.errorcode();
+}
+
+@if(errorexit!=null)
+{
+     <div class="alert alert-danger alert-dismissible w-50" role="alert">
+            <strong>No proper leaves available to approve!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> 
+}
+ <a class="btn btn-primary" asp-action="savestatus" asp-controller="Manager">Update status</a>
+<a class="btn btn-primary mb-3" asp-action="Managerdashboard" asp-controller="Manager">Back to Daashboard</a>
+
+<table class="table table-dark table-striped" style="margin-top:50px" id="leavetable">
+<thead>
+    <tr>
+        <td>Employee Id</td>
+        <td>leave Type</td>
+        <td>leave reason</td>
+        <td>leave from</td>
+        <td>leave To</td>
+        <td>Total Number of days</td>
+        <td>Approve</td>
+        <td>Denie</td>
+        @* <td class="table-info">cancel</td> *@
+        
+    </tr>
+</thead>
+    <tbody class="table-secondary">
+@foreach(var leave in Model)
+{
+      <tr> 
+        <td>@leave.EmployeeId</td>
+        <td>@leave.leavetype</td>
+        <td>@leave.leaveReason</td>
+        <td>@{string? Fromdate=leave.leaveFrom?.ToString("dd/MM/yyyy");}@Fromdate</td>
+        <td>@{string? Todate=leave.leaveTo?.ToString("dd/MM/yyyy");}@Todate</td>
+        <td>@{var fromdate=leave.leaveFrom; var todate=leave.leaveTo; var diff=todate-fromdate;}
+            @{
+                string? leaverate=diff?.ToString("dd");
+            }
+            @leaverate
+        </td>
+        <td><a class="btn btn-primary"asp-action="Approved" asp-controller="Manager" asp-route-id="@leave.leaveid">Approve</a></td>
+        <td><a class="btn btn-primary" asp-action="Denial" asp-controller="Manager" asp-route-id="@leave.leaveid">Denies</a></td>
+
+        @* <td class="table-info"><form method="post" action="@Url.Action("Delete", new { id =@leave.Id })">
+    <button type="submit">Delete</button>
+</form></td> *@
+    </tr>
+}
+</tbody>
+</table>

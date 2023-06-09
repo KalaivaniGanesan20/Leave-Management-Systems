@@ -1,0 +1,45 @@
+@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityRole>;
+
+    <div class="Container"style="margin-top:50px">
+    <a class="btn btn-primary mb-3" asp-action="admindashboard" asp-controller="admin">Back to Daashboard</a>
+<hr/>
+    <a class="btn btn-primary mb-3"  asp-action="create" asp-controller="Roles">create roles</a>
+
+    <section class="row" style="margin-top:70px;">
+    <!--Table-->
+    <div class="col">
+    <table class="table table-dark table-striped">
+        <!--Table head-->
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model=>model.Id)</th>
+                <th>@Html.DisplayNameFor(model=>model.Name)</th>
+            </tr>
+        </thead>
+        <!--Table head-->
+
+        <!--Table body-->
+        <tbody>
+            @foreach(var i in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model=>i.Id)</td>
+                    <td>@Html.DisplayFor(model=>i.Name)</td>
+                </tr>
+            }
+        </tbody>
+        <!--Table body-->
+    </table></div>
+    <div class="col">
+   <img src="https://www.brahmaait.com/wp-content/uploads/2018/09/New-Job-Trends-in-IT-Sector.jpg"/>
+    </div>
+    <!--Table-->
+</section>
+<style>
+  table, thead, tbody {
+  border: 5px solid black;
+  border-radius: 10px;
+}
+</style>
+</div>

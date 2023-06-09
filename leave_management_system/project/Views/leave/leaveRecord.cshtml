@@ -1,0 +1,80 @@
+@using leave.Models.Domain;
+@using leaveControllers;
+@model IEnumerable<Leaves>
+     <style>
+.track-line {
+height: 2px !important;
+background-color: #488978;
+opacity: 1;
+}
+
+.dot {
+height: 10px;
+width: 10px;
+margin-left: 3px;
+margin-right: 3px;
+margin-top: 0px;
+background-color: #488978;
+border-radius: 50%;
+display: inline-block
+}
+
+.big-dot {
+height: 25px;
+width: 25px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 0px;
+background-color: #488978;
+border-radius: 50%;
+display: inline-block;
+}
+
+.big-dot i {
+font-size: 12px;
+}
+
+.card-stepper {
+z-index: 0
+}
+  </style>
+<a type="submit" class="btn btn-primary mb-3 w-25" asp-action="user" asp-controller="Login">back to dashboard</a>
+
+<table class="table table-dark table-striped" style="margin-top:50px" id="leavetable">
+<thead>
+    <tr>
+        <td>leave Type</td>
+        <td>leave reason</td>
+        <td>leave from</td>
+        <td>leave To</td>
+        <td>Total Number of days</td>
+        <td>status</td>
+        <td>Track status</td>
+        @* <td class="table-info">cancel</td> *@
+        
+    </tr>
+</thead>
+    <tbody class="table-secondary">
+@foreach(var leave in Model)
+{
+      <tr>  <td>@leave.leavetype</td>
+        <td>@leave.leaveReason</td>
+        <td>@{string? Fromdate=leave.leaveFrom?.ToString("dd/MM/yyyy");}@Fromdate</td>
+        <td>@{string? Todate=leave.leaveTo?.ToString("dd/MM/yyyy");}@Todate</td>
+        <td>@leave.Numberofdays</td>
+        @* <td>@{var fromdate=leave.leaveFrom; var todate=leave.leaveTo; var diff=todate-fromdate;}
+            @{
+                string? leaverate=diff?.ToString("dd");
+            }
+            @leaverate
+        </td> *@
+        <td>@leave.status</td>
+        <td><a asp-action="leavestatus" asp-controller="leave" asp-route-id="@leave.leaveid">TrackLeave</a>
+</td>
+        @* <td class="table-info"><form method="post" action="@Url.Action("Delete", new { id =@leave.Id })">
+    <button type="submit">Delete</button>
+</form></td> *@
+    </tr>
+}
+</tbody>
+                      

@@ -1,0 +1,42 @@
+@using EmployeedataModels;
+@model List<Employee>
+
+<div style="margin-top:50px">
+
+<form class="searchform" asp-action="search" method="post">
+    @Html.TextBox("searchvalue")
+    <input type="submit" value="search">
+</form>
+<h1>@ViewBag.searchname</h1>
+<hr>
+     <a class="btn btn-primary mb-3" asp-action="admindashboard" asp-controller="admin">Back to Daashboard</a>
+<table class="table table-dark table-striped" align="right">
+  <thead>
+    <tr><th scope="col">Employee-Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Mailid</th>
+        <th scope="col">Contact_number</th>
+        <th scope="col">date of joined</th>
+        <th scope="col">Department</th>
+        <th scope="col">Salary</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      @foreach(var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.username</td>
+                <td>@user.dateofbirth</td>
+                <td>@user.emailid</td>
+                <td>@user.contact_number</td>
+                <td>@user.dateofjoined</td>
+                <td>@user.department</td>
+                <td>@user.salary</td>
+            </tr>
+        }
+        
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,56 @@
+@using EmployeeTimesheet;
+@model MyTask
+@{
+  if(ViewBag.Proceed=="yes")
+  { <div class="alert alert-danger alert-dismissible" role="alert">
+    You Can't fill this timesheet as it is submiited for proceedings!....
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+  }
+}
+
+<a type="submit" class="btn btn-primary mb-3 w-25" asp-action="user" asp-controller="Login" style="margin-left:70%;margin-top:30px"> << back to dashboard</a>
+
+<div class="Box">
+<form class="row g-5 needs-validation" style="margin-left:70px;" novalidate method="post">
+   <div class="col-md-5">
+    <label for="validationCustom02" class="form-label">Timesheet ID</label>
+   <input asp-for="TimesheetId" type="text" class="form-control" id="timesheetid" value="@ViewBag.TimesheetId" required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+<div class="col-md-5">
+    <label asp-for="taskname" class="form-label">taskname</label>
+      <input asp-for="taskname" type="text" class="form-control">
+  </div>
+<div class="col-md-5">
+    <label asp-for="start_time" class="form-label">start_time</label>
+      <input asp-for="start_time" type="time" class="form-control">
+  </div>
+<div class="col-md-5">
+    <label asp-for="end_time" class="form-label">end_time</label>
+      <input asp-for="end_time" type="time" class="form-control">
+  </div>
+<div class="col-md-5">
+    <label asp-for="hoursworked" class="form-label">hoursworked</label>
+      <input asp-for="hoursworked" type="text" class="form-control">
+  </div>
+<div class="col-md-5">
+    <label asp-for="taskstatus" class="form-label">taskstatus</label>
+      <input asp-for="taskstatus" type="text" class="form-control">
+  </div>
+      <button type="submit" class="btn btn-primary mb-3 w-50" style="margin-left:20%">save</button>&nbsp;
+      </form>
+ </div>
+ 
+ <style>
+  .Box{
+   border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px;
+  margin-top:50px;
+  margin-left:30px;
+  width:100%;
+}
+ </style>

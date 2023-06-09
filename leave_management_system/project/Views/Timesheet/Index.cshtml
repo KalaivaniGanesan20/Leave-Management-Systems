@@ -1,0 +1,29 @@
+@model IEnumerable<DateTime>
+ <a type="submit" class="btn btn-primary mb-3 w-25" asp-action="user" asp-controller="Login"> << back to dashboard</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Day</th>
+      <th scope="col">Timesheet</th>
+    </tr>
+  </thead>
+  <tbody>
+     @foreach(var d in Model)
+        {
+           <tr>
+           <td>@{var date=d.ToString("dd/MM/yyyy");}@date</td>
+           <td>@d.DayOfWeek.ToString()</td>
+           @{
+           @if(@date== DateTime.Now.ToString("dd/MM/yyyy"))
+           {
+           <td><a asp-action="timesheet" asp-controller="Timesheet" asp-route-id=@date>Timesheet</a></td>
+           }
+           else{
+           <td></td>
+           }}
+        </tr> 
+        }
+  </tbody>
+</table>

@@ -1,0 +1,75 @@
+﻿@page
+@using app.Areas.Identity.Pages.Account;
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="alert alert-danger w-25" style="margin-top:10px"role="alert">
+   @Html.ValidationSummary(false)
+</div>
+}
+<style>
+  .loginform
+{
+    margin-left:50%;
+    margin-top: -40%;
+}
+</style>
+<div class="logincontainer">
+  <img style="width:50%" src="https://www.spectra-vision.com/wp-content/uploads/2022/07/leave-management-system-768x812.jpg">
+<div class="loginform">
+ <form id="account" method="post" style="margin-left:50px">
+                <h2>Login</h2>
+                <hr/>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating w-75">
+                    <input asp-for="Input.username" class="form-control" value=@TempData["uname"]  aria-required="true" />
+                    <label asp-for="Input.username" class="form-label"></label>
+                    <span asp-validation-for="Input.username" class="text-danger"></span>
+                </div>&nbsp;
+                <div class="form-floating w-75">
+                    <input asp-for="Input.Password" class="form-control" value=@TempData["password"] autocomplete="current-password" aria-required="true" />
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div>
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-75 btn btn-lg btn-primary">Log in</button>
+                </div>
+</form>
+</div></div>
+<script>
+  (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

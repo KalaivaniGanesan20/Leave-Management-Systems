@@ -1,0 +1,69 @@
+@using EmployeeTimesheet;
+@model IEnumerable<Timesheet>
+ <a class="btn btn-primary mb-3" asp-action="HRdashboard" asp-controller="HR">Back to Daashboard</a>
+
+<table class="table table-dark table-striped" style="margin-top:50px" id="leavetable">
+<thead>
+    <tr>
+        <td>Timesheet id</td>
+        <td>username</td>
+        <td>project title</td>
+        <td>Totalhoursworked</td>
+        <td>status</td>
+        @* <td class="table-info">cancel</td> *@
+        
+    </tr>
+</thead>
+<tbody>
+    @foreach(var sheet in Model)
+    {
+        <tr>
+            <td>@sheet.TimesheetId</td>
+            <td>@sheet.username</td>
+            <td>@sheet.projectname</td>
+            <td>@sheet.Totalhoursworked</td>
+            <td><a class="btn btn-primary" asp-action="proceed" asp-controller="HR" asp-route-id="@sheet.TimesheetId" asp-route-status="proceed">proceed</a>&nbsp;
+            <a class="btn btn-primary"asp-action="proceed" asp-controller="HR" asp-route-id="@sheet.TimesheetId" asp-route-status="rework">Rework</a></td>
+        </tr>
+    }
+</tbody>
+</table>
+
+
+     <style>
+.track-line {
+height: 2px !important;
+background-color: #488978;
+opacity: 1;
+}
+
+.dot {
+height: 10px;
+width: 10px;
+margin-left: 3px;
+margin-right: 3px;
+margin-top: 0px;
+background-color: #488978;
+border-radius: 50%;
+display: inline-block
+}
+
+.big-dot {
+height: 25px;
+width: 25px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 0px;
+background-color: #488978;
+border-radius: 50%;
+display: inline-block;
+}
+
+.big-dot i {
+font-size: 12px;
+}
+
+.card-stepper {
+z-index: 0
+}
+  </style>

@@ -1,0 +1,84 @@
+@using EmployeeTimesheet
+@model IEnumerable<Timesheet>
+    <head>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    </head>
+<form style="margin-top:30px" class="form-outline mb-4" asp-action="Report" method="post">
+    @Html.TextBox("searchedvalue")
+    <input type="submit" value="search">
+</form>
+
+<button id="btnpdf" class="btn btn-primary"> generate pdf</button>
+
+
+<div id="pdfcontent">
+<table id="reporttable" class="table table-dark table-striped" >
+<thead>
+        <th>projectName</th>
+        <th>date</th>
+        <th>task</th>
+        <th>TotalHoursworked</th>
+        <th></th>
+</thead>
+<tbody class="table-secondary">
+    
+    @foreach(var timesheet in Model)
+    {       <tr>
+                <td>@timesheet.projectname</td>
+                <td>@timesheet.date</td>
+                <td>@foreach(var task in timesheet.tasks)
+                    {
+                       @task.taskname<br>
+                    }
+                </td>
+                <td>@timesheet.Totalhoursworked</td>
+                <td></td>
+                
+            </tr>
+    }
+</tbody>
+</table>
+
+<div id="leave">
+ <table class="table table-dark table-striped">
+    <h5>@ViewBag.searchedvalue</h5>
+    <thead>
+        <th>sickleave</th>
+        <th>compensatoryleave</th>
+        <th>casualleave</th>
+        <th>Lossofpay</th>
+        <th>annualleave</th>
+    </thead>
+    <tbody class="table-secondary">
+ @foreach(var l in ViewBag.mybalance)
+    {
+        <tr>
+            <td>@l.sickleave</td>
+            <td>@l.Compensatoryleave</td>
+            <td>@l.casualleave</td>
+            <td>@l.Lossofpay</td>
+            <td>@l.annualleave</td>
+        </tr>
+    } 
+    </tbody>
+</table></div>
+</div>
+
+<script type="text/javascript">
+$("#btnpdf").click(function()
+{
+    var sHtml=$("#leave").html();
+    sHtml=sHtml.replace(/</g,"StrtTag").replace(/>/g,"EndTag");
+    window.open("../HR/PrintPDF?html=" + sHtml,'_blank');
+});
+
+$(document).ready(function(){
+    $("#reporttable").DataTable(
+    {
+      "scrollCollapse":true,
+    })
+})
+</script>
+ <a class="btn btn-primary mb-3" asp-action="HRdashboard" asp-controller="HR">Back to Daashboard</a>
+
+
